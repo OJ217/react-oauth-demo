@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "heroku-prebuild": "npm install",
-    "server": "node src/server.js",
-    "watch-server": "nodemon src/server.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "keywords": [
     "oauth",
