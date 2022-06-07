@@ -11,7 +11,7 @@ const { connectDB } = require("./config/dbConnection")
 const { googleStrategy, facebookStrategy, twitterStrategy, githubStrategy, serializeUser, deserializeUser, sessionOptions } = require("./config/passportConfig")
 require("dotenv").config();
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 
 passport.use(googleStrategy);
 passport.use(facebookStrategy);

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 async function connectDB() {
     try {
-        await mongoose.connect("mongodb://localhost:27017/reactOAuthDemoDB")
+        await mongoose.connect(process.env.MONGO_URI)
             .then((db) => {
                 console.log("\x1b[36m%s\x1b[0m", `MongoDB connected: ${db.connection.host}`);
             });

@@ -4,6 +4,7 @@
   "description": "demo project for implementing oauth authentication in react app",
   "main": "server.js",
   "scripts": {
+    "heroku-prebuild": "npm install",
     "server": "node src/server.js",
     "watch-server": "nodemon src/server.js"
   },
