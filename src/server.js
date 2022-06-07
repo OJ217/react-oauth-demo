@@ -19,11 +19,12 @@ passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
 const app = express();
-app.use(morgan("combined"))
+app.use(morgan("combined"));
 app.use(cors({
     origin: "http://localhost:3000",
     credentials: true,
-}))
+}));
+app.set("trust proxy", 1);
 app.use(helmet());
 app.use(session(sessionOptions));
 
