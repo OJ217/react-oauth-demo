@@ -1,6 +1,3 @@
-const fs =  require("fs");
-const path = require("path");
-const https = require("https");
 const express = require("express");
 const helmet = require('helmet');
 const morgan = require("morgan");
@@ -55,12 +52,7 @@ app.get("/auth/user", (req, res, next) => {
     res.send(req.user);
 })
 
-https.createServer({
-    cert: fs.readFileSync(path.join(__dirname, "..", "cert.pem")),
-    key: fs.readFileSync(path.join(__dirname, "..", "key.pem")),
-}, app)
-.listen(PORT, async () => {
+app.listen(PORT, async () => {
     await connectDB();
     console.log(`Server running. PORT: ${PORT}`);
 })
-
