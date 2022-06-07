@@ -9,6 +9,7 @@ const { googleStrategy, facebookStrategy, twitterStrategy, githubStrategy, seria
 require("dotenv").config();
 
 const PORT = process.env.PORT || 5000;
+const CLIENT_APP_URL = process.env.CLIENT_APP_URL || "http://localhost:3000";
 
 passport.use(googleStrategy);
 passport.use(facebookStrategy);
@@ -25,7 +26,7 @@ app.use(helmet());
 
 app.set("trust proxy", 1);
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: CLIENT_APP_URL,
     credentials: true,
 }));
 app.use(session(sessionOptions));
@@ -38,10 +39,10 @@ app.get("/auth/facebook", passport.authenticate("facebook"));
 app.get("/auth/twitter", passport.authenticate("twitter"));
 app.get("/auth/github", passport.authenticate("github", {scope: ["user:email"]}));
 
-app.get("/auth/google/callback", passport.authenticate("google", {successRedirect: "http://localhost:3000", failureRedirect: "http://localhost:3000/sign-in-failure"}));
-app.get("/auth/facebook/callback", passport.authenticate("facebook", {successRedirect: "http://localhost:3000", failureRedirect: "http://localhost:3000/sign-in-failure"}));
-app.get("/auth/twitter/callback", passport.authenticate("twitter", {successRedirect: "http://localhost:3000", failureRedirect: "http://localhost:3000/sign-in-failure"}));
-app.get("/auth/github/callback", passport.authenticate("github", {successRedirect: "http://localhost:3000", failureRedirect: "http://localhost:3000/sign-in-failure"}));
+app.get("/auth/google/callback", passport.authenticate("google", {successRedirect: CLIENT_APP_URL, failureRedirect: `${CLIENT_APP_URL}/sign-in-failure`}));
+app.get("/auth/facebook/callback", passport.authenticate("facebook", {successRedirect: CLIENT_APP_URL, failureRedirect: `${CLIENT_APP_URL}/sign-in-failure`}));
+app.get("/auth/twitter/callback", passport.authenticate("twitter", {successRedirect: CLIENT_APP_URL, failureRedirect: `${CLIENT_APP_URL}/sign-in-failure`}));
+app.get("/auth/github/callback", passport.authenticate("github", {successRedirect: CLIENT_APP_URL, failureRedirect: `${CLIENT_APP_URL}/sign-in-failure`}));
 
 app.get("/auth/log-out", (req, res, next) => {
     if(req.user) {
