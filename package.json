@@ -1,0 +1,32 @@
+{
+  "name": "react-passport-demo",
+  "version": "1.0.0",
+  "description": "demo project for implementing oauth authentication in react app",
+  "main": "server.js",
+  "scripts": {
+    "server": "node src/server.js",
+    "watch-server": "nodemon src/server.js"
+  },
+  "keywords": [
+    "oauth",
+    "passport",
+    "express",
+    "mongodb"
+  ],
+  "author": "Ochirjav Jargalsaikhan",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "helmet": "^5.1.0",
+    "mongoose": "^6.3.5",
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-facebook": "^3.0.0",
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-twitter": "^1.0.4"
+  }
+}
