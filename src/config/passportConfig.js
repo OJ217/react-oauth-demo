@@ -6,6 +6,8 @@ const User = require("../models/UserModel");
 require("dotenv").config();
 
 async function verifyCallback(accessToken, refreshToken, profile, done) {
+    // done(null, user) = stores the second value to req.session.passport
+    // so that passport can access it later when serializing user
     console.log("Access token:", accessToken);
     console.log("Profile:", profile);
     User.findOne({providerID: profile.id}, async (err, user) => {
@@ -50,12 +52,21 @@ const githubStrategy = new githubAuth({
     clientSecret: process.env.GITHUB_CLIENT_SECRET
 }, verifyCallback);
 
+// uses the express-session middleware in the process
 function serializeUser (user, done) {
+    // user is the value put inside req.session.passport 
+    // in third party oauth verifyCallback function
     console.log("Serialization:", user);
-    done(null, user.providerID || user._id);
+    
+    // puts the providerID property in the browser cookie
+    // attaches the providerID property to the req.user object
+    done(null, user.providerID);
 }
 
+// uses the express-session middleware in the process
 function deserializeUser (userID, done) {
+    // userID is the providerID returned from the browser cookie
+    // works when we access the req.user object
     console.log("Deserialization:", userID);
     User.findOne({providerID: userID}, (err, user) => {
         if(err) {
